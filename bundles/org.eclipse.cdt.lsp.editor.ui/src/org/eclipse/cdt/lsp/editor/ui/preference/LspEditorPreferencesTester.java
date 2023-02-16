@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright (c) 2023 Bachmann electronic GmbH and others.
- * 
+ *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Gesa Hentschke (Bachmann electronic GmbH) - initial implementation
  *******************************************************************************/
@@ -32,11 +32,11 @@ import org.eclipse.ui.PlatformUI;
 public class LspEditorPreferencesTester extends PropertyTester {
 	private static final String LSP_CEDITOR_ID = "org.eclipse.cdt.lsp.CEditor";
 	private final ResolveDocumentFile file;
-	
+
 	public LspEditorPreferencesTester() {
 		file = new ResolveDocumentFile();
 	}
-	
+
 	@Override
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
 		if (receiver instanceof IDocument) {
@@ -48,12 +48,12 @@ public class LspEditorPreferencesTester extends PropertyTester {
 			return isLspEditorActive();
 		} else if (receiver instanceof IEditorInput) {
 			IResource resource = ((IEditorInput) receiver).getAdapter(IResource.class);
-			if(resource != null && resource.getProject() != null) {
+			if (resource != null && resource.getProject() != null) {
 				return preferLspEditor(resource.getProject());
 			}
 			// check the starting point, this is probably a link to another (header)file outside the project. Use LSP C-Editor when active:
 			return isLspEditorActive();
-		} 
+		}
 		return false;
 	}
 
@@ -62,7 +62,7 @@ public class LspEditorPreferencesTester extends PropertyTester {
 		return Platform.getPreferencesService().getBoolean(Activator.PLUGIN_ID, option.identifer(),
 				option.defaultValue(), new IScopeContext[] { new ProjectScope(project) });
 	}
-	
+
 	private boolean isLspEditorActive() {
 		var activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (activeWorkbenchWindow != null && activeWorkbenchWindow.getActivePage() != null) {

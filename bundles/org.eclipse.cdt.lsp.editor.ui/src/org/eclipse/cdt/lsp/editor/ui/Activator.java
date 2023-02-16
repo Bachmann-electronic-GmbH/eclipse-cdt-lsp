@@ -1,12 +1,12 @@
 /*******************************************************************************
  * Copyright (c) 2023 Bachmann electronic GmbH and others.
- * 
+ *
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Gesa Hentschke (Bachmann electronic GmbH) - initial implementation
  *******************************************************************************/
@@ -30,7 +30,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	/**
 	 * The constructor
 	 */
@@ -57,7 +57,7 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
-	
+
 	public IPreferenceStore getLspEditorPreferences() {
 		if (preferenceStore == null) {
 			preferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, Activator.PLUGIN_ID);

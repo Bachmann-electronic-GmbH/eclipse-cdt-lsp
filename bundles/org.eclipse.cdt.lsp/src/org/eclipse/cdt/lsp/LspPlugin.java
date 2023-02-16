@@ -3,9 +3,9 @@
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Gesa Hentschke (Bachmann electronic GmbH) - initial implementation
  *******************************************************************************/
@@ -29,7 +29,7 @@ public class LspPlugin extends AbstractUIPlugin {
 
 	// The shared instance
 	private static LspPlugin plugin;
-	
+
 	private ICLanguageServerProvider cLanguageServerProvider;
 
 	/**
@@ -59,19 +59,19 @@ public class LspPlugin extends AbstractUIPlugin {
 	public static LspPlugin getDefault() {
 		return plugin;
 	}
-	
+
 	public ICLanguageServerProvider getCLanguageServerProvider() {
 		return cLanguageServerProvider;
 	}
-	
+
 	public static void logError(String message, Throwable throwable) {
 		getDefault().getLog().error(message, throwable);
 	}
-	
+
 	public static void logWarning(String message) {
 		getDefault().getLog().warn(message);
 	}
-	
+
 	public static void logWarning(String message, Throwable throwable) {
 		getDefault().getLog().warn(message, throwable);
 	}

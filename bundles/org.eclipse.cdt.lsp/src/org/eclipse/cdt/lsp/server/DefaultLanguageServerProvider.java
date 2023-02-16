@@ -3,9 +3,9 @@
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Gesa Hentschke (Bachmann electronic GmbH) - initial implementation
  *******************************************************************************/
@@ -24,20 +24,20 @@ public class DefaultLanguageServerProvider implements ICLanguageServerProvider {
 	public static final String COMPLETION_STYLE = "--completion-style=detailed";
 	public static final String PRETTY = "--pretty";
 	public static final String QUERY_DRIVER = "--query-driver=";
-	
+
 	protected final List<String> commands;
-	
+
 	protected EnableExpression enableExpression;
-	
+
 	public DefaultLanguageServerProvider() {
 		commands = createCommands();
 	}
-	
+
 	@Override
 	public List<String> getCommands() {
 		return commands;
 	}
-	
+
 	private List<String> createCommands() {
 		List<String> commands = new ArrayList<>();
 		if (commands.isEmpty()) {
@@ -60,7 +60,7 @@ public class DefaultLanguageServerProvider implements ICLanguageServerProvider {
 
 	@Override
 	public void setEnableExpression(EnableExpression enableExpression) {
-		this.enableExpression= enableExpression;
+		this.enableExpression = enableExpression;
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class DefaultLanguageServerProvider implements ICLanguageServerProvider {
 		if (enableExpression != null) {
 			return enableExpression.evaluate(document);
 		}
-		//language server is always enabled when no enable expression has been defined in the extension point: 
+		//language server is always enabled when no enable expression has been defined in the extension point:
 		return true;
 	}
 

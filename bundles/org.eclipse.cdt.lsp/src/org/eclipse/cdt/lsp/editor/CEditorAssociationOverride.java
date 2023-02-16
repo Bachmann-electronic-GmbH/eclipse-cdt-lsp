@@ -3,9 +3,9 @@
  * This program and the accompanying materials are made
  * available under the terms of the Eclipse Public License 2.0
  * which is available at https://www.eclipse.org/legal/epl-2.0/
- * 
+ *
  * SPDX-License-Identifier: EPL-2.0
- * 
+ *
  * Contributors:
  * Gesa Hentschke (Bachmann electronic GmbH) - initial implementation
  *******************************************************************************/
@@ -40,7 +40,8 @@ public class CEditorAssociationOverride implements IEditorAssociationOverride {
 	 * Remove not appropriate C Editor
 	 */
 	@Override
-	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
+	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType,
+			IEditorDescriptor[] editorDescriptors) {
 		if (isNoCElement(contentType)) {
 			return editorDescriptors;
 		}
@@ -51,7 +52,8 @@ public class CEditorAssociationOverride implements IEditorAssociationOverride {
 	}
 
 	@Override
-	public IEditorDescriptor[] overrideEditors(String fileName, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
+	public IEditorDescriptor[] overrideEditors(String fileName, IContentType contentType,
+			IEditorDescriptor[] editorDescriptors) {
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(fileName);
 		if (resource != null && resource instanceof IFile) {
 			return overrideEditors(new FileEditorInput((IFile) resource), contentType, editorDescriptors);
@@ -60,13 +62,15 @@ public class CEditorAssociationOverride implements IEditorAssociationOverride {
 	}
 
 	@Override
-	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
+	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType,
+			IEditorDescriptor editorDescriptor) {
 		IEditorDescriptor descriptor = getEditorDescriptor(editorInput, contentType);
 		return descriptor != null ? descriptor : editorDescriptor;
 	}
 
 	@Override
-	public IEditorDescriptor overrideDefaultEditor(String fileName, IContentType contentType, IEditorDescriptor editorDescriptor) {
+	public IEditorDescriptor overrideDefaultEditor(String fileName, IContentType contentType,
+			IEditorDescriptor editorDescriptor) {
 		IResource resource = ResourcesPlugin.getWorkspace().getRoot().findMember(fileName);
 		if (resource != null && resource instanceof IFile) {
 			return overrideDefaultEditor(new FileEditorInput((IFile) resource), contentType, editorDescriptor);
@@ -75,10 +79,10 @@ public class CEditorAssociationOverride implements IEditorAssociationOverride {
 	}
 
 	private boolean isNoCElement(IContentType contentType) {
-		if (contentType == null || !(CCorePlugin.CONTENT_TYPE_CHEADER.equals(contentType.getId()) ||
-				CCorePlugin.CONTENT_TYPE_CSOURCE.equals(contentType.getId()) ||
-				CCorePlugin.CONTENT_TYPE_CXXHEADER.equals(contentType.getId()) ||
-				CCorePlugin.CONTENT_TYPE_CXXSOURCE.equals(contentType.getId())))
+		if (contentType == null || !(CCorePlugin.CONTENT_TYPE_CHEADER.equals(contentType.getId())
+				|| CCorePlugin.CONTENT_TYPE_CSOURCE.equals(contentType.getId())
+				|| CCorePlugin.CONTENT_TYPE_CXXHEADER.equals(contentType.getId())
+				|| CCorePlugin.CONTENT_TYPE_CXXSOURCE.equals(contentType.getId())))
 			return true;
 		return false;
 	}
