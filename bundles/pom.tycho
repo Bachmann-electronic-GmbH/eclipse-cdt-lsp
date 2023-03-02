@@ -1,0 +1,5 @@
+## tycho automatic module detection d0d671c6-2d9c-4097-b914-427be17de302
+org.eclipse.cdt.lsp
+org.eclipse.cdt.lsp.editor.ui
+org.eclipse.cdt.lsp.editor.ui.test
+org.eclipse.cdt.lsp.test
