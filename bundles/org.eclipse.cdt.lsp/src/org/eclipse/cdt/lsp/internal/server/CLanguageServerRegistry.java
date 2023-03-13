@@ -21,7 +21,6 @@ import org.eclipse.cdt.lsp.server.EnableExpression;
 import org.eclipse.cdt.lsp.server.ICLanguageServerProvider;
 import org.eclipse.core.expressions.ExpressionConverter;
 import org.eclipse.core.expressions.IEvaluationContext;
-import org.eclipse.core.runtime.Adapters;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionPoint;
@@ -29,10 +28,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.IHandlerService;
 
-public class CLanguageServerRegistry {
+public class CLanguageServerRegistry extends RegistryBase {
 	private static final String EXTENSION_ID = LspPlugin.PLUGIN_ID + ".serverProvider"; //$NON-NLS-1$
 	private static final String SERVER_ELEMENT = "server"; //$NON-NLS-1$
-	private static final String CLASS = "class"; //$NON-NLS-1$
 	private static final String PRIORITY = "priority"; //$NON-NLS-1$
 	private static final String ENABLED_WHEN_ATTRIBUTE = "enabledWhen"; //$NON-NLS-1$
 	private final IExtensionPoint cExtensionPoint;
@@ -97,17 +95,6 @@ public class CLanguageServerRegistry {
 
 	private IEvaluationContext getEvaluationContext() {
 		return Optional.ofNullable(PlatformUI.getWorkbench().getService(IHandlerService.class)).map(IHandlerService::getCurrentState).orElse(null);
-	}
-
-	private <T> Object getInstanceFromExtension(IConfigurationElement configurationElement, Class<T> clazz) {
-		Object result = null;
-		try {
-			Object obj = configurationElement.createExecutableExtension(CLASS);
-			result = Adapters.adapt(obj, clazz);
-		} catch (CoreException e) {
-			LspPlugin.logError(e.getMessage(), e);
-		}
-		return result;
 	}
 
 }
